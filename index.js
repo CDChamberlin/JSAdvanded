@@ -10,9 +10,12 @@ function makeCounter(startFrom = 0, incrementBy = 1) {
 }
 let counter1 = makeCounter(undefined, 2);
 let counter2 = makeCounter(1);
+
+/*
 counter1(); // 2
 counter1(); // 4
 counter2(); // 2
+*/
 
 // Question 2
 
@@ -21,6 +24,8 @@ counter2(); // 2
 console.log(`This message will be printed after a delay: ${msg}`)
 } 
  */
+
+/*
 const delayMsg = (msg) =>
   console.log(`This message will be printed after a delay: ${msg}`);
 setTimeout(delayMsg, 100, "#1: Delayed by 100ms");
@@ -29,6 +34,7 @@ setTimeout(delayMsg, 0, "#3: Delayed by 0ms");
 delayMsg("#4: Not delayed at all");
 const m5 = setTimeout(delayMsg, 1e4, `#5 delayed by 10 seconds`);
 clearTimeout(m5);
+*/
 
 // Question 3 
 
@@ -63,16 +69,30 @@ function printFibonacci(limit = Infinity){
     current++;
   }, 2000)
 }
-printFibonacci()
+//printFibonacci()
 
 function printFibonacciTimeouts(limit = 20){
   let start = 0;
   setTimeout(function go(){
     console.log(fib(start));
-    if (start < limit) setTimeout(go, 1000)
+    if (true) setTimeout(go, 1000)
     start++
 
   }, 1000)
 
 }
-// printFibonacciTimeouts()
+
+//printFibonacciTimeouts()
+
+// Question 5
+// given code
+let car = {
+  make: "Porsche",
+  model: '911',
+  year: 1964,
+  description() {
+  console.log(`This car is a ${this.make} ${this.model} from ${this.year}`);
+  }
+  };
+  car.description(); //works
+  setTimeout(car.description, 200); //fails
