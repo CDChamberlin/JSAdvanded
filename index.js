@@ -52,10 +52,27 @@ function fib(num, memo) {
     if (memo[num]) return memo[num];
     if (num <= 1) return 1;
   
-    return memo[num] = fibonacci(num - 1, memo) + fibonacci(num - 2, memo);
+    return memo[num] = fib(num - 1, memo) + fib(num - 2, memo);
   }
-// console.log(fib(100));
 
-function printFibonacci() {
-  setInterval();
+function printFibonacci(limit = Infinity){
+  let current = 0;
+  let timer = setInterval(function() {
+    console.log(fib(current));
+    if (current === limit) clearInterval(timer)
+    current++;
+  }, 2000)
 }
+printFibonacci()
+
+function printFibonacciTimeouts(limit = 20){
+  let start = 0;
+  setTimeout(function go(){
+    console.log(fib(start));
+    if (start < limit) setTimeout(go, 1000)
+    start++
+
+  }, 1000)
+
+}
+// printFibonacciTimeouts()
