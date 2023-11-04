@@ -36,7 +36,7 @@ const m5 = setTimeout(delayMsg, 1e4, `#5 delayed by 10 seconds`);
 clearTimeout(m5);
 */
 
-// Question 3 
+// Question 3
 
 /*
 function printMe() {
@@ -48,38 +48,36 @@ function debounce(fucn) {}
 setTimeout(printMe, 100);
 setTimeout(printMe, 200);
 setTimeout(printMe, 300);
-*/ 
+*/
 
 // Question 4
 /* Code to compute fibonacci numbers */
 function fib(num, memo) {
-    memo = memo || {};
-  
-    if (memo[num]) return memo[num];
-    if (num <= 1) return 1;
-  
-    return memo[num] = fib(num - 1, memo) + fib(num - 2, memo);
-  }
+  memo = memo || {};
 
-function printFibonacci(limit = Infinity){
+  if (memo[num]) return memo[num];
+  if (num <= 1) return 1;
+
+  return (memo[num] = fib(num - 1, memo) + fib(num - 2, memo));
+}
+
+function printFibonacci(limit = Infinity) {
   let current = 0;
-  let timer = setInterval(function() {
+  let timer = setInterval(function () {
     console.log(fib(current));
-    if (current === limit) clearInterval(timer)
+    if (current === limit) clearInterval(timer);
     current++;
-  }, 2000)
+  }, 2000);
 }
 //printFibonacci()
 
-function printFibonacciTimeouts(limit = 20){
+function printFibonacciTimeouts(limit = 20) {
   let start = 0;
-  setTimeout(function go(){
+  setTimeout(function go() {
     console.log(fib(start));
-    if (true) setTimeout(go, 1000)
-    start++
-
-  }, 1000)
-
+    if (true) setTimeout(go, 1000);
+    start++;
+  }, 1000);
 }
 
 //printFibonacciTimeouts()
@@ -88,11 +86,18 @@ function printFibonacciTimeouts(limit = 20){
 // given code
 let car = {
   make: "Porsche",
-  model: '911',
+  model: "911",
   year: 1964,
   description() {
-  console.log(`This car is a ${this.make} ${this.model} from ${this.year}`);
-  }
-  };
-  car.description(); //works
-  setTimeout(function (){ car.description(); } , 200); //fails
+    console.log(`This car is a ${this.make} ${this.model} from ${this.year}`);
+  },
+};
+car.description(); //works
+carShallow = {...car}
+carDeep = JSON.parse(JSON.stringify(car)); // creates a deep clone
+carShallow.year = 1966;
+carDeep.model = "901"
+setTimeout(function () {
+  car.description();
+}, 200); //fails // fixed
+setTimeout(car.description.bind(car), 1000)
