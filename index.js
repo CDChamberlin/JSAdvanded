@@ -122,11 +122,111 @@ function Person(name, age, gender) {
   this.name = name;
   this.age = age;
   this.gender = gender;
-  Object.prototype.toString = () =>{ return `I'm ${this.name}, a ${this.age} old ${this.gender}`;}
+  Object.prototype.toString = function() {
+    return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
+  };
 }
-  const person1 = new Person('James Brown', 73, 'male')
+/* Person.prototype.toString = function() {
+  return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
+}; */
+const person1 = new Person('James Brown', 73, 'male')
+
   console.log('person1: '+person1) //prints person1: [object Object]
 const person2 = new Person('Jimmy', 12, 'male')
 //const person4 = new Person('Cindy', 13, 'female')
 console.log('person 2: '+person2)
 console.log('person 1: '+person1)
+
+function Student(name, age, gender, cohort){
+  Person.call(this, name, age, gender)
+  this.cohort = cohort
+  Object.prototype.toString = function() {
+    return `I'm ${this.name}, a ${this.age} old ${this.gender}, and I'm in cohort ${this.cohort}`;
+  };
+}
+let student1 = new Student("Gary", 19, "male", 420)
+let student2 = new Student("Jamie", 20, "female", 420)
+
+console.log(""+student1)
+console.log(""+student2)
+
+
+// Question 8
+// given
+class DigitalClock {
+  constructor(prefix) {
+    this.prefix = prefix;
+  }
+  display() {
+    let date = new Date();
+    //create 3 variables in one go using array destructuring
+    let [hours, mins, secs] = [
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+    ];
+    if (hours < 10) hours = "0" + hours;
+    if (mins < 10) mins = "0" + mins;
+    if (secs < 10) secs = "0" + secs;
+    console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
+  }
+  stop() {
+    clearInterval(this.timer);
+  }
+  start() {
+    this.display();
+    this.timer = setInterval(() => this.display(), 1000);
+  }
+}
+const myClock = new DigitalClock("my clock:");
+//myClock.start();
+
+class PrecisionClock extends DigitalClock{
+  ticks 
+  constructor(prefix, precision = 1000){
+    super(prefix)
+    this.ticks = precision;
+  }
+  start(){
+    super.display();
+    this.timer = setInterval(() => this.display(), this.ticks)
+  }
+
+}
+
+const myPrecisionClock1 = new PrecisionClock('my Precision Clock');
+const myPrecisionClock2 = new PrecisionClock('my Precision Clock 2', 500);
+//myPrecisionClock1.start()
+//myPrecisionClock2.start()
+
+class AlarmClock extends DigitalClock{
+  wakeupTime
+  hours
+  mins
+  secs
+  constructor(prefix, alarm){
+    super(prefix);
+    this.wakeupTime = alarm
+  }
+  display(){
+    let date = new Date();
+    //create 3 variables in one go using array destructuring
+    [this.hours, this.mins, this.secs] = [
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+    ];
+    if (this.hours < 10) hours = "0" + this.hours;
+    if (this.mins < 10) mins = "0" + this.mins;
+    if (this.secs < 10) secs = "0" + this.secs;
+    console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
+  }
+  start(){
+    display()
+    if (this.wakeupTime.getHours() == this.hours && this.wakeupTime.getMinutes == this.mins){
+      console.log(`Wake Up`);
+      this.stop()
+    }
+  }
+}
+const alarm = new AlarmClock('Alarm Clock', new Date(2023,))
