@@ -204,9 +204,9 @@ class AlarmClock extends DigitalClock{
   hours
   mins
   secs
-  constructor(prefix, alarm){
+  constructor(prefix, alarm = "07:00"){
     super(prefix);
-    this.wakeupTime = alarm
+    this.wakeupTime = new Date(2023, 11, 4, alarm.split(":")[0], alarm.split(":")[1])
   }
   display(){
     let date = new Date();
@@ -216,17 +216,22 @@ class AlarmClock extends DigitalClock{
       date.getMinutes(),
       date.getSeconds(),
     ];
-    if (this.hours < 10) hours = "0" + this.hours;
-    if (this.mins < 10) mins = "0" + this.mins;
-    if (this.secs < 10) secs = "0" + this.secs;
-    console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
-  }
-  start(){
-    display()
-    if (this.wakeupTime.getHours() == this.hours && this.wakeupTime.getMinutes == this.mins){
+    if (this.hours < 10) this.hours = "0" + this.hours;
+    if (this.mins < 10) this.mins = "0" + this.mins;
+    if (this.secs < 10) this.secs = "0" + this.secs;
+    console.log(`${this.wakeupTime.getHours()} hours: ${this.wakeupTime.getMinutes()}`)
+    console.log(`${this.prefix} ${this.hours}:${this.mins}:${this.secs}`);
+    if (this.wakeupTime.getHours() === this.hours && this.wakeupTime.getMinutes() === this.mins){
       console.log(`Wake Up`);
       this.stop()
+     
     }
   }
+  start(){
+    this.display()
+    this.timer = setInterval(() => this.display(), this.ticks)
+  }
 }
-const alarm = new AlarmClock('Alarm Clock', new Date(2023,))
+// const alarm = new AlarmClock('Alarm Clock', new Date(2023, 11, 4, 16, 46))
+const alarm = new AlarmClock("Alarm Clock")
+alarm.start()
