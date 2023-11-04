@@ -93,11 +93,23 @@ let car = {
   },
 };
 car.description(); //works
-carShallow = {...car}
+carShallow = { ...car };
 carDeep = JSON.parse(JSON.stringify(car)); // creates a deep clone
 carShallow.year = 1966;
-carDeep.model = "901"
+carDeep.model = "901";
 setTimeout(function () {
   car.description();
 }, 200); //fails // fixed
-setTimeout(car.description.bind(car), 1000)
+setTimeout(car.description.bind(car), 1000);
+
+// Question 6
+//given code
+function multiply(a, b, c = 1, d = 1) {
+  console.log(a * b * c * d);
+}
+Function.prototype.delay = function (time, ...params) {
+  setTimeout(() => this(...params), time);
+}; // Due to Arrow expression, it must be defined before first call
+multiply.delay(500,5, 5, 2, 20); // prints 25 after 500 milliseconds
+// printFibonacci.delay(500, 9) test to see if delay works on a function with 4 and 1 paramater at the same time.
+
