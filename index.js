@@ -122,34 +122,33 @@ function Person(name, age, gender) {
   this.name = name;
   this.age = age;
   this.gender = gender;
-  Object.prototype.toString = function() {
+  Object.prototype.toString = function () {
     return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
   };
 }
 /* Person.prototype.toString = function() {
   return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
 }; */
-const person1 = new Person('James Brown', 73, 'male')
+const person1 = new Person("James Brown", 73, "male");
 
-  console.log('person1: '+person1) //prints person1: [object Object]
-const person2 = new Person('Jimmy', 12, 'male')
+console.log("person1: " + person1); //prints person1: [object Object]
+const person2 = new Person("Jimmy", 12, "male");
 //const person4 = new Person('Cindy', 13, 'female')
-console.log('person 2: '+person2)
-console.log('person 1: '+person1)
+console.log("person 2: " + person2);
+console.log("person 1: " + person1);
 
-function Student(name, age, gender, cohort){
-  Person.call(this, name, age, gender)
-  this.cohort = cohort
-  Object.prototype.toString = function() {
+function Student(name, age, gender, cohort) {
+  Person.call(this, name, age, gender);
+  this.cohort = cohort;
+  Object.prototype.toString = function () {
     return `I'm ${this.name}, a ${this.age} old ${this.gender}, and I'm in cohort ${this.cohort}`;
   };
 }
-let student1 = new Student("Gary", 19, "male", 420)
-let student2 = new Student("Jamie", 20, "female", 420)
+let student1 = new Student("Gary", 19, "male", 420);
+let student2 = new Student("Jamie", 20, "female", 420);
 
-console.log(""+student1)
-console.log(""+student2)
-
+console.log("" + student1);
+console.log("" + student2);
 
 // Question 8
 // given
@@ -181,34 +180,39 @@ class DigitalClock {
 const myClock = new DigitalClock("my clock:");
 //myClock.start();
 
-class PrecisionClock extends DigitalClock{
-  ticks 
-  constructor(prefix, precision = 1000){
-    super(prefix)
+class PrecisionClock extends DigitalClock {
+  ticks;
+  constructor(prefix, precision = 1000) {
+    super(prefix);
     this.ticks = precision;
   }
-  start(){
+  start() {
     super.display();
-    this.timer = setInterval(() => this.display(), this.ticks)
+    this.timer = setInterval(() => this.display(), this.ticks);
   }
-
 }
 
-const myPrecisionClock1 = new PrecisionClock('my Precision Clock');
-const myPrecisionClock2 = new PrecisionClock('my Precision Clock 2', 500);
+const myPrecisionClock1 = new PrecisionClock("my Precision Clock");
+const myPrecisionClock2 = new PrecisionClock("my Precision Clock 2", 500);
 //myPrecisionClock1.start()
 //myPrecisionClock2.start()
 
-class AlarmClock extends DigitalClock{
-  wakeupTime
-  hours
-  mins
-  secs
-  constructor(prefix, alarm = "07:00"){
+class AlarmClock extends DigitalClock {
+  wakeupTime;
+  hours;
+  mins;
+  secs;
+  constructor(prefix, alarm = "07:00") {
     super(prefix);
-    this.wakeupTime = new Date(2023, 11, 4, alarm.split(":")[0], alarm.split(":")[1])
+    this.wakeupTime = new Date(
+      2023,
+      11,
+      4,
+      alarm.split(":")[0],
+      alarm.split(":")[1]
+    );
   }
-  display(){
+  display() {
     let date = new Date();
     //create 3 variables in one go using array destructuring
     [this.hours, this.mins, this.secs] = [
@@ -219,19 +223,29 @@ class AlarmClock extends DigitalClock{
     if (this.hours < 10) this.hours = "0" + this.hours;
     if (this.mins < 10) this.mins = "0" + this.mins;
     if (this.secs < 10) this.secs = "0" + this.secs;
-    console.log(`${this.wakeupTime.getHours()} hours: ${this.wakeupTime.getMinutes()}`)
+    console.log(
+      `${this.wakeupTime.getHours()} hours: ${this.wakeupTime.getMinutes()}`
+    );
     console.log(`${this.prefix} ${this.hours}:${this.mins}:${this.secs}`);
-    if (this.wakeupTime.getHours() === this.hours && this.wakeupTime.getMinutes() === this.mins){
+    if (
+      this.wakeupTime.getHours() === this.hours &&
+      this.wakeupTime.getMinutes() === this.mins
+    ) {
       console.log(`Wake Up`);
-      this.stop()
-     
+      this.stop();
     }
   }
-  start(){
-    this.display()
-    this.timer = setInterval(() => this.display(), this.ticks)
+  start() {
+    this.display();
+    this.timer = setInterval(() => this.display(), this.ticks);
   }
 }
 // const alarm = new AlarmClock('Alarm Clock', new Date(2023, 11, 4, 16, 46))
-const alarm = new AlarmClock("Alarm Clock")
-alarm.start()
+const alarm = new AlarmClock("Alarm Clock");
+alarm.start();
+
+// Question 9
+function randomDelay() {
+  // your code
+}
+randomDelay().then(() => console.log("There appears to have been a delay."));
