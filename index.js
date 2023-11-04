@@ -92,16 +92,19 @@ let car = {
     console.log(`This car is a ${this.make} ${this.model} from ${this.year}`);
   },
 };
-car.description(); //works
+// car.description(); //works
 carShallow = { ...car };
 carDeep = JSON.parse(JSON.stringify(car)); // creates a deep clone
 carShallow.year = 1966;
 carDeep.model = "901";
+/*
 setTimeout(function () {
   car.description();
 }, 200); //fails // fixed
+*/
+/*
 setTimeout(car.description.bind(car), 1000);
-
+*/
 // Question 6
 //given code
 function multiply(a, b, c = 1, d = 1) {
@@ -110,6 +113,20 @@ function multiply(a, b, c = 1, d = 1) {
 Function.prototype.delay = function (time, ...params) {
   setTimeout(() => this(...params), time);
 }; // Due to Arrow expression, it must be defined before first call
-multiply.delay(500,5, 5, 2, 20); // prints 25 after 500 milliseconds
+// multiply.delay(500,5, 5, 2, 20); // prints 25 after 500 milliseconds
 // printFibonacci.delay(500, 9) test to see if delay works on a function with 4 and 1 paramater at the same time.
 
+// Question 7
+// given
+function Person(name, age, gender) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  Object.prototype.toString = () =>{ return `I'm ${this.name}, a ${this.age} old ${this.gender}`;}
+}
+  const person1 = new Person('James Brown', 73, 'male')
+  console.log('person1: '+person1) //prints person1: [object Object]
+const person2 = new Person('Jimmy', 12, 'male')
+//const person4 = new Person('Cindy', 13, 'female')
+console.log('person 2: '+person2)
+console.log('person 1: '+person1)
