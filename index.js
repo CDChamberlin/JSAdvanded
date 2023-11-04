@@ -95,4 +95,4 @@ let car = {
   }
   };
   car.description(); //works
-  setTimeout(car.description, 200); //fails
+  setTimeout(function (){ car.description(); } , 200); //fails
