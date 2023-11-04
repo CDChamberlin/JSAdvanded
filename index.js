@@ -162,3 +162,21 @@ class DigitalClock {
 }
 const myClock = new DigitalClock("my clock:");
 myClock.start();
+
+class PrecisionClock extends DigitalClock{
+  ticks 
+  constructor(prefix, precision = 1000){
+    super(prefix)
+    this.ticks = precision;
+  }
+  start(){
+    super.display();
+    this.timer = setInterval(() => this.display(), this.ticks)
+  }
+
+}
+
+const myPrecisionClock1 = new PrecisionClock('my Precision Clock');
+const myPrecisionClock2 = new PrecisionClock('my Precision Clock 2', 500);
+myPrecisionClock1.start()
+myPrecisionClock2.start()
