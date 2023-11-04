@@ -242,10 +242,15 @@ class AlarmClock extends DigitalClock {
 }
 // const alarm = new AlarmClock('Alarm Clock', new Date(2023, 11, 4, 16, 46))
 const alarm = new AlarmClock("Alarm Clock");
-alarm.start();
+// alarm.start();
 
 // Question 9
 function randomDelay() {
-  // your code
+  let delay = Math.floor(Math.random()*20*1e3)
+  return new Promise((function(resolve, reject){
+    setTimeout(() => delay%2 === 0 ? resolve(delay): reject(new Error(delay)), delay)
+  }))
 }
-randomDelay().then(() => console.log("There appears to have been a delay."));
+randomDelay().then((result) => console.log(`There appears to have been a delay of ${result} milliseconds`))
+.catch((result) =>console.log(`There seems to have been an error after ${result} milliseconds. Please try again`))
+.finally(() => console.log("All done with the promise"))
