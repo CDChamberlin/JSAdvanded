@@ -8,7 +8,7 @@ function makeCounter(startFrom = 0, incrementBy = 1) {
     return currentCount;
   };
 }
-let counter1 = makeCounter(undefined, 2);
+/* let counter1 = makeCounter(undefined, 2);
 let counter2 = makeCounter(1);
 
 /*
@@ -25,8 +25,7 @@ console.log(`This message will be printed after a delay: ${msg}`)
 } 
  */
 
-/*
-const delayMsg = (msg) =>
+/* const delayMsg = (msg) =>
   console.log(`This message will be printed after a delay: ${msg}`);
 setTimeout(delayMsg, 100, "#1: Delayed by 100ms");
 setTimeout(delayMsg, 20, "#2: Delayed by 20ms");
@@ -36,7 +35,7 @@ const m5 = setTimeout(delayMsg, 1e4, `#5 delayed by 10 seconds`);
 clearTimeout(m5);
 */
 
-// Question 3
+// Question 3 
 
 /*
 function printMe() {
