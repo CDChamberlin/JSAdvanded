@@ -91,16 +91,19 @@ let car = {
     console.log(`This car is a ${this.make} ${this.model} from ${this.year}`);
   },
 };
-car.description(); //works
+// car.description(); //works
 carShallow = { ...car };
 carDeep = JSON.parse(JSON.stringify(car)); // creates a deep clone
 carShallow.year = 1966;
 carDeep.model = "901";
+/*
 setTimeout(function () {
   car.description();
 }, 200); //fails // fixed
+*/
+/*
 setTimeout(car.description.bind(car), 1000);
-
+*/
 // Question 6
 //given code
 function multiply(a, b, c = 1, d = 1) {
@@ -109,6 +112,70 @@ function multiply(a, b, c = 1, d = 1) {
 Function.prototype.delay = function (time, ...params) {
   setTimeout(() => this(...params), time);
 }; // Due to Arrow expression, it must be defined before first call
-multiply.delay(500,5, 5, 2, 20); // prints 25 after 500 milliseconds
+// multiply.delay(500,5, 5, 2, 20); // prints 25 after 500 milliseconds
 // printFibonacci.delay(500, 9) test to see if delay works on a function with 4 and 1 paramater at the same time.
 
+// Question 7
+// given
+function Person(name, age, gender) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  Object.prototype.toString = () => {
+    return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
+  };
+}
+/*  const person1 = new Person('James Brown', 73, 'male')
+  console.log('person1: '+person1) //prints person1: [object Object]
+const person2 = new Person('Jimmy', 12, 'male')
+//const person4 = new Person('Cindy', 13, 'female')
+console.log('person 2: '+person2)
+console.log('person 1: '+person1) */
+
+// Question 8
+// given
+class DigitalClock {
+  constructor(prefix) {
+    this.prefix = prefix;
+  }
+  display() {
+    let date = new Date();
+    //create 3 variables in one go using array destructuring
+    let [hours, mins, secs] = [
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+    ];
+    if (hours < 10) hours = "0" + hours;
+    if (mins < 10) mins = "0" + mins;
+    if (secs < 10) secs = "0" + secs;
+    console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
+  }
+  stop() {
+    clearInterval(this.timer);
+  }
+  start() {
+    this.display();
+    this.timer = setInterval(() => this.display(), 1000);
+  }
+}
+const myClock = new DigitalClock("my clock:");
+myClock.start();
+
+class PrecisionClock extends DigitalClock{
+  ticks 
+  constructor(prefix, precision = 1000){
+    super(prefix)
+    this.ticks = precision;
+  }
+  start(){
+    super.display();
+    this.timer = setInterval(() => this.display(), this.ticks)
+  }
+
+}
+
+const myPrecisionClock1 = new PrecisionClock('my Precision Clock');
+const myPrecisionClock2 = new PrecisionClock('my Precision Clock 2', 500);
+myPrecisionClock1.start()
+myPrecisionClock2.start()
