@@ -92,10 +92,10 @@ let car = {
   },
 };
 // car.description(); //works
-carShallow = { ...car };
+/* carShallow = { ...car };
 carDeep = JSON.parse(JSON.stringify(car)); // creates a deep clone
 carShallow.year = 1966;
-carDeep.model = "901";
+carDeep.model = "901"; */
 /*
 setTimeout(function () {
   car.description();
@@ -126,25 +126,24 @@ function Person(name, age, gender) {
   };
 }
 
-/* const person1 = new Person('James Brown', 73, 'male')
-console.log('person1: '+person1) //prints person1: [object Object]
-const person2 = new Person('Jimmy', 12, 'male')
+/* console.log("person1: " + person1); //prints person1: [object Object]
+const person2 = new Person("Jimmy", 12, "male");
 //const person4 = new Person('Cindy', 13, 'female')
-console.log('person 2: '+person2)
-*/
-function Student(name, age, gender, cohort){
-  Person.call(this, name, age, gender)
-  this.cohort = cohort
-  Object.prototype.toString = function() {
+console.log("person 2: " + person2);
+console.log("person 1: " + person1); */
+
+function Student(name, age, gender, cohort) {
+  Person.call(this, name, age, gender);
+  this.cohort = cohort;
+  Object.prototype.toString = function () {
     return `I'm ${this.name}, a ${this.age} old ${this.gender}, and I'm in cohort ${this.cohort}`;
   };
 }
-let student1 = new Student("Gary", 19, "male", 420)
-let student2 = new Student("Jamie", 20, "female", 420)
-/*
-console.log(""+student1)
-console.log(""+student2)
-*/
+let student1 = new Student("Gary", 19, "male", 420);
+let student2 = new Student("Jamie", 20, "female", 420);
+
+/* console.log("" + student1);
+console.log("" + student2); */
 
 // Question 8
 // given
@@ -245,11 +244,61 @@ const alarm = new AlarmClock("Alarm Clock");
 
 // Question 9
 function randomDelay() {
-  let delay = Math.floor(Math.random()*20*1e3)
-  return new Promise((function(resolve, reject){
-    setTimeout(() => delay%2 === 0 ? resolve(delay): reject(new Error(delay)), delay)
-  }))
+  let delay = Math.floor(Math.random() * 20 * 1e3);
+  return new Promise(function (resolve, reject) {
+    setTimeout(
+      () => (delay % 2 === 0 ? resolve(delay) : reject(new Error(delay))),
+      delay
+    );
+  });
 }
-randomDelay().then((result) => console.log(`There appears to have been a delay of ${result} milliseconds`))
-.catch((result) =>console.log(`There seems to have been an error after ${result} milliseconds. Please try again`))
-.finally(() => console.log("All done with the promise"))
+
+/*randomDelay()
+  .then((result) =>
+    console.log(`There appears to have been a delay of ${result} milliseconds`)
+  )
+  .catch((result) =>
+    console.log(
+      `There seems to have been an error after ${result} milliseconds. Please try again`
+    )
+  )
+  .finally(() => console.log("All done with the promise"));
+*/
+// Question 10
+// given
+
+//run 'npm init' and accept all the defaults
+//run 'npm install node-fetch'
+//add this line to package.json after line 5: "type": "module",
+import fetch from "node-fetch";
+globalThis.fetch = fetch;
+function fetchURLData(url) {
+  let fetchPromise = fetch(url).then((response) => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+  });
+  return fetchPromise;
+}
+fetchURLData("https://jsonplaceholder.typicode.com/todos/1")
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error.message));
+
+async function newFetchURLData(url) {
+  let fetchPromise = await fetch(url).then((response) => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+  });
+  return fetchPromise;
+}
+newFetchURLData("https://jsonplaceholder.typicode.com/todos/201") // There are two hundred todos on JSON Placeholders, so this should fail
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error.message + " 'new'"));
+fetchURLData("https://jsonplaceholder.typicode.com/todos/201") // There are two hundred todos on JSON Placeholders, so this should fail
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error.message + " original"));
