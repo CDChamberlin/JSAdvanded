@@ -8,7 +8,7 @@ function makeCounter(startFrom = 0, incrementBy = 1) {
     return currentCount;
   };
 }
-let counter1 = makeCounter(undefined, 2);
+/* let counter1 = makeCounter(undefined, 2);
 let counter2 = makeCounter(1);
 
 /*
@@ -25,8 +25,7 @@ console.log(`This message will be printed after a delay: ${msg}`)
 } 
  */
 
-/*
-const delayMsg = (msg) =>
+/* const delayMsg = (msg) =>
   console.log(`This message will be printed after a delay: ${msg}`);
 setTimeout(delayMsg, 100, "#1: Delayed by 100ms");
 setTimeout(delayMsg, 20, "#2: Delayed by 20ms");
@@ -36,7 +35,7 @@ const m5 = setTimeout(delayMsg, 1e4, `#5 delayed by 10 seconds`);
 clearTimeout(m5);
 */
 
-// Question 3
+// Question 3 
 
 /*
 function printMe() {
@@ -122,33 +121,30 @@ function Person(name, age, gender) {
   this.name = name;
   this.age = age;
   this.gender = gender;
-  Object.prototype.toString = function () {
+  Object.prototype.toString = function() {
     return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
   };
 }
-/* Person.prototype.toString = function() {
-  return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
-}; */
-const person1 = new Person("James Brown", 73, "male");
 
-console.log("person1: " + person1); //prints person1: [object Object]
-const person2 = new Person("Jimmy", 12, "male");
+/* const person1 = new Person('James Brown', 73, 'male')
+console.log('person1: '+person1) //prints person1: [object Object]
+const person2 = new Person('Jimmy', 12, 'male')
 //const person4 = new Person('Cindy', 13, 'female')
-console.log("person 2: " + person2);
-console.log("person 1: " + person1);
-
-function Student(name, age, gender, cohort) {
-  Person.call(this, name, age, gender);
-  this.cohort = cohort;
-  Object.prototype.toString = function () {
+console.log('person 2: '+person2)
+*/
+function Student(name, age, gender, cohort){
+  Person.call(this, name, age, gender)
+  this.cohort = cohort
+  Object.prototype.toString = function() {
     return `I'm ${this.name}, a ${this.age} old ${this.gender}, and I'm in cohort ${this.cohort}`;
   };
 }
-let student1 = new Student("Gary", 19, "male", 420);
-let student2 = new Student("Jamie", 20, "female", 420);
-
-console.log("" + student1);
-console.log("" + student2);
+let student1 = new Student("Gary", 19, "male", 420)
+let student2 = new Student("Jamie", 20, "female", 420)
+/*
+console.log(""+student1)
+console.log(""+student2)
+*/
 
 // Question 8
 // given
@@ -178,6 +174,7 @@ class DigitalClock {
   }
 }
 const myClock = new DigitalClock("my clock:");
+
 //myClock.start();
 
 class PrecisionClock extends DigitalClock {
@@ -192,8 +189,10 @@ class PrecisionClock extends DigitalClock {
   }
 }
 
+
 const myPrecisionClock1 = new PrecisionClock("my Precision Clock");
 const myPrecisionClock2 = new PrecisionClock("my Precision Clock 2", 500);
+
 //myPrecisionClock1.start()
 //myPrecisionClock2.start()
 
