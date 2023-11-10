@@ -10,9 +10,12 @@ function makeCounter(startFrom = 0, incrementBy = 1) {
 }
 /* let counter1 = makeCounter(undefined, 2);
 let counter2 = makeCounter(1);
+
+/*
 counter1(); // 2
 counter1(); // 4
-counter2(); // 2 */
+counter2(); // 2
+*/
 
 // Question 2
 
@@ -29,9 +32,11 @@ setTimeout(delayMsg, 20, "#2: Delayed by 20ms");
 setTimeout(delayMsg, 0, "#3: Delayed by 0ms");
 delayMsg("#4: Not delayed at all");
 const m5 = setTimeout(delayMsg, 1e4, `#5 delayed by 10 seconds`);
-clearTimeout(m5); */
+clearTimeout(m5);
+*/
 
 // Question 3 
+
 /*
 function printMe() {
   console.log("printing debounced message");
@@ -42,37 +47,56 @@ function debounce(fucn) {}
 setTimeout(printMe, 100);
 setTimeout(printMe, 200);
 setTimeout(printMe, 300);
-*/ 
+*/
 
 // Question 4
 /* Code to compute fibonacci numbers */
 function fib(num, memo) {
-    memo = memo || {};
-  
-    if (memo[num]) return memo[num];
-    if (num <= 1) return 1;
-  
-    return memo[num] = fib(num - 1, memo) + fib(num - 2, memo);
-  }
+  memo = memo || {};
 
-function printFibonacci(limit = Infinity){
+  if (memo[num]) return memo[num];
+  if (num <= 1) return 1;
+
+  return (memo[num] = fib(num - 1, memo) + fib(num - 2, memo));
+}
+
+function printFibonacci(limit = Infinity) {
   let current = 0;
-  let timer = setInterval(function() {
+  let timer = setInterval(function () {
     console.log(fib(current));
-    if (current === limit) clearInterval(timer)
+    if (current === limit) clearInterval(timer);
     current++;
-  }, 2000)
+  }, 2000);
 }
-printFibonacci()
+//printFibonacci()
 
-function printFibonacciTimeouts(limit = 20){
+function printFibonacciTimeouts(limit = 20) {
   let start = 0;
-  setTimeout(function go(){
+  setTimeout(function go() {
     console.log(fib(start));
-    if (start < limit) setTimeout(go, 1000)
-    start++
-
-  }, 1000)
-
+    if (true) setTimeout(go, 1000);
+    start++;
+  }, 1000);
 }
-// printFibonacciTimeouts()
+
+//printFibonacciTimeouts()
+
+// Question 5
+// given code
+let car = {
+  make: "Porsche",
+  model: "911",
+  year: 1964,
+  description() {
+    console.log(`This car is a ${this.make} ${this.model} from ${this.year}`);
+  },
+};
+car.description(); //works
+carShallow = {...car}
+carDeep = JSON.parse(JSON.stringify(car)); // creates a deep clone
+carShallow.year = 1966;
+carDeep.model = "901"
+setTimeout(function () {
+  car.description();
+}, 200); //fails // fixed
+setTimeout(car.description.bind(car), 1000)
