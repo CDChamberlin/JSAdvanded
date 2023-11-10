@@ -287,21 +287,20 @@ fetchURLData("https://jsonplaceholder.typicode.com/todos/1")
   .then((data) => console.log(data))
   .catch((error) => console.error(error.message));
 
-  async function newFetchURLData(url){
-    let fetchPromise = await fetch(url).then((response) =>
-    {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        throw new Error(`Request failed with status ${response.status}`);        
-      }
-    })
-    return fetchPromise;
-  }
-  newFetchURLData("https://jsonplaceholder.typicode.com/todos/201") // There are two hundred todos on JSON Placeholders, so this should fail
+async function newFetchURLData(url) {
+  let fetchPromise = await fetch(url).then((response) => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+  });
+  return fetchPromise;
+}
+newFetchURLData("https://jsonplaceholder.typicode.com/todos/201") // There are two hundred todos on JSON Placeholders, so this should fail
   .then((data) => console.log(data))
   .catch((error) => console.error(error.message + " 'new'"));
-  fetchURLData("https://jsonplaceholder.typicode.com/todos/201") // There are two hundred todos on JSON Placeholders, so this should fail
+fetchURLData("https://jsonplaceholder.typicode.com/todos/201") // There are two hundred todos on JSON Placeholders, so this should fail
   .then((data) => console.log(data))
   .catch((error) => console.error(error.message + " original"));
-  
+
