@@ -8,7 +8,7 @@ function makeCounter(startFrom = 0, incrementBy = 1) {
     return currentCount;
   };
 }
-let counter1 = makeCounter(undefined, 2);
+/* let counter1 = makeCounter(undefined, 2);
 let counter2 = makeCounter(1);
 
 /*
@@ -25,8 +25,7 @@ console.log(`This message will be printed after a delay: ${msg}`)
 } 
  */
 
-/*
-const delayMsg = (msg) =>
+/* const delayMsg = (msg) =>
   console.log(`This message will be printed after a delay: ${msg}`);
 setTimeout(delayMsg, 100, "#1: Delayed by 100ms");
 setTimeout(delayMsg, 20, "#2: Delayed by 20ms");
@@ -127,14 +126,10 @@ function Person(name, age, gender) {
   this.name = name;
   this.age = age;
   this.gender = gender;
-  Object.prototype.toString = function () {
+  Object.prototype.toString = function() {
     return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
   };
 }
-/* Person.prototype.toString = function() {
-  return `I'm ${this.name}, a ${this.age} old ${this.gender}`;
-}; */
-const person1 = new Person("James Brown", 73, "male");
 
 /* console.log("person1: " + person1); //prints person1: [object Object]
 const person2 = new Person("Jimmy", 12, "male");
@@ -183,6 +178,7 @@ class DigitalClock {
   }
 }
 const myClock = new DigitalClock("my clock:");
+
 //myClock.start();
 
 class PrecisionClock extends DigitalClock {
@@ -197,8 +193,10 @@ class PrecisionClock extends DigitalClock {
   }
 }
 
+
 const myPrecisionClock1 = new PrecisionClock("my Precision Clock");
 const myPrecisionClock2 = new PrecisionClock("my Precision Clock 2", 500);
+
 //myPrecisionClock1.start()
 //myPrecisionClock2.start()
 
@@ -259,6 +257,7 @@ function randomDelay() {
     );
   });
 }
+
 /*randomDelay()
   .then((result) =>
     console.log(`There appears to have been a delay of ${result} milliseconds`)
@@ -308,4 +307,3 @@ newFetchURLData("https://jsonplaceholder.typicode.com/todos/201") // There are t
 fetchURLData("https://jsonplaceholder.typicode.com/todos/201") // There are two hundred todos on JSON Placeholders, so this should fail
   .then((data) => console.log(data))
   .catch((error) => console.error(error.message + " original"));
-
