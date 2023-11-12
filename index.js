@@ -35,19 +35,24 @@ const m5 = setTimeout(delayMsg, 1e4, `#5 delayed by 10 seconds`);
 clearTimeout(m5);
 */
 
-// Question 3 
-
-/*
-function printMe() {
-  console.log("printing debounced message");
+// Question 3
+function printMe(msg) {
+  console.log("printing debounced message: " + msg);
 }
-//printMe = debounce(printMe); //create this debounce function for a)
-function debounce(fucn) {}
+printMe = debounce(printMe); //create this debounce function for a) 
+// Can also add a delay to this, otherwise defults to 1 second. 
+function debounce(fucn, timer = 1000) {
+  let delay;
+
+  return (msg) => {
+    clearTimeout(delay);
+    delay = setTimeout(fucn, timer, msg);
+  };
+}
 //fire off 3 calls to printMe within 300ms - only the LAST one should print, after 1000ms of no calls
-setTimeout(printMe, 100);
-setTimeout(printMe, 200);
-setTimeout(printMe, 300);
-*/
+setTimeout(printMe, 100, "message 1");
+setTimeout(printMe, 200, "message 2");
+setTimeout(printMe, 300, "message 3");
 
 // Question 4
 /* Code to compute fibonacci numbers */
